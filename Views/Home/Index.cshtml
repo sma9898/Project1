@@ -2,9 +2,22 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
 
-<a asp-action="SelectAppointment" class="btn">Make an Appointment</a>
+<!--Welcome-->
+<h1>Welcome to Layton Utah Temple Tours!</h1>
+
+<!--Temple picture-->
+<img src="~/img/Temple.jpg" />
+
+
+<!--Basic tour information-->
+<p>General Tour Instructions:</p>
+
+<ul>
+    <li>Masks are required.</li>
+    <li>Park on Rosewood (west side of the temple) and meet at the Visitors Center trailer.</li>
+    <li>Dress casual, except on Sunday</li>
+</ul>
+
+<!--Sign Up button-->
+<a asp-action="SelectAppointment" class="btn btn-dark">Sign Up!</a>

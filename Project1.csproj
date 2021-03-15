@@ -17,4 +17,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\img\Temple.jpg" />
+  </ItemGroup>
+
 </Project>
