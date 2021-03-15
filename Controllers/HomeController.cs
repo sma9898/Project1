@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Project1.Models;
+using Project1.Models.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,11 +12,14 @@ namespace Project1.Controllers
 {
     public class HomeController : Controller
     {
+        private TempleAppointmentContext context { get; set; }
+
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, TempleAppointmentContext con)
         {
             _logger = logger;
+            context = con;
         }
 
         public IActionResult Index()
