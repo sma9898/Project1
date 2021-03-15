@@ -1,0 +1,62 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+
+    if (Model != null)
+    {
+        ViewBag.ListOfAppointments = Model.AppointmentsMade;
+
+    }
+
+    ViewBag.Counter = 0;
+
+}
+
+@model AvailableTours
+
+<form asp-action="SelectAppointment" method="post">
+    <label asp-for="Times">Select a date:</label>
+    <input asp-for="Times" type="date" onchange="this.form.submit()" />
+</form>
+
+
+@if (Model != null)
+{
+    <form class="text-center">
+        <input type="hidden" value="@Model.Times.Date.Date" />
+        <div class="btn-group-sm">
+            @foreach (var x in Model.Times.TimesList)
+            {
+                @foreach (var y in ViewBag.ListOfAppointments)
+                {
+                    @if (x == y)
+                    {
+                        <a class="btn btn-info disabled" value="@x">
+                            @x
+                    </a>
+                    <br />
+                    ViewBag.Counter = ViewBag.Counter + 1;
+                }
+
+                }
+
+                @if (ViewBag.Counter == 0)
+                {
+                    <a class="btn btn-info" value="@x">@x</a>
+                    <br />
+                }
+
+
+                ViewBag.Counter = 0;
+            }
+        </div>
+    </form>
+
+}
+
+
+
+
+
+
