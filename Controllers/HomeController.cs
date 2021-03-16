@@ -69,7 +69,7 @@ namespace Project1.Controllers
             if (ModelState.IsValid)
             {
                 //Update database
-                Group g = new Group { GroupName = GroupName, Size = Size, EmailAddress = EmailAddress, PhoneNumber = PhoneNumber }
+                Group g = new Group { GroupName = GroupName, Size = Size, EmailAddress = EmailAddress, PhoneNumber = PhoneNumber };
                 context.Groups.Add(g);
                 context.Appointments.Add(new Appointment { Group = g, AppointmentTime = date });
                 context.SaveChanges();
