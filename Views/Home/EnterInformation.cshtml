@@ -1,0 +1,28 @@
+@model Group
+
+<form asp-action="EnterInformation" method="post">
+    <p>Thank you for choosing to visit the temple! Please enter the appropriate information below to make your reservation.</p>
+    <!--Put selected date here-->
+    <h5>Date selected: </h5>
+
+    <label asp-for="GroupName">Name of Group</label>
+    <input asp-for="GroupName" />
+    <br />
+
+    <label asp-for="Size">Size of Group</label>
+    <input asp-for="Size"/>
+    <br />
+
+    <label asp-for="EmailAddress">Email Address</label>
+    <input asp-for="EmailAddress" />
+    <br />
+
+    <label asp-for="EmailAddress">Phone Number (Optional)</label>
+    <input asp-for="EmailAddress"/>
+    <br />
+
+    <button type="submit">Sign Up</button>
+    <br />
+
+    <div asp-validation-summary="All"></div>
+</form>
