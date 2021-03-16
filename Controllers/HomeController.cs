@@ -41,15 +41,23 @@ namespace Project1.Controllers
         [HttpPost]
         public IActionResult SelectAppointment(DateTime Times)
         {
-            return View(new AvailableTours(Times, context)
+            return View(new AvailableToursViewModel(Times, context)
             { });
 
         }
 
         [HttpPost]
-        public IActionResult SelectTime(string date, string time)
+        public IActionResult SelectTime(DateTime date, string time)
         {
-            return View("EnterInformation"); //***Pass in date and time as DateTime object
+            string AppointmentDate = date.Date.ToString();
+            AppointmentDate = AppointmentDate.Replace(" 12:00:00 AM", "");
+            string myAppointment = AppointmentDate + " " + time;
+            DateTime AppointmentInfo = Convert.ToDateTime(myAppointment);
+            return View("EnterInformation", new GroupAppointmentViewModel
+            {
+                AppointmentTime = AppointmentInfo
+            }); //***Pass in date and time as DateTime object
+
         }
 
 
@@ -63,20 +71,20 @@ namespace Project1.Controllers
 
         //Submitting tour information form
         [HttpPost]
-        public IActionResult EnterInformation(string GroupName, int Size, string EmailAddress, string PhoneNumber, DateTime date) //Pass in parameters
+        public IActionResult EnterInformation(GroupAppointmentViewModel model) //Pass in parameters
         {
             //Validation
             if (ModelState.IsValid)
             {
                 //Update database
-                Group g = new Group { GroupName = GroupName, Size = Size, EmailAddress = EmailAddress, PhoneNumber = PhoneNumber };
-                context.Groups.Add(g);
-                context.Appointments.Add(new Appointment { Group = g, AppointmentTime = date });
+                context.Groups.Add(model.Group);
+                context.Appointments.Add(new Appointment { Group = model.Group, AppointmentTime = model.AppointmentTime });
                 context.SaveChanges();
+                return RedirectToAction("ViewAppointments");
 
             }
 
-            return View("ViewAppointments"); //***Change this to appointments list
+            return View(); //***Change this to appointments list
         }
 
         //View Appointments Page

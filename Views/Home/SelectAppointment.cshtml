@@ -13,7 +13,7 @@
 
 }
 
-@model AvailableTours
+@model AvailableToursViewModel
 
 <form asp-action="SelectAppointment" method="post">
     <label asp-for="Times">Select a date:</label>
@@ -24,7 +24,7 @@
 @if (Model != null)
 {
     <form class="text-center" asp-action="SelectTime">
-        <input type="hidden" value="@Model.Times.Date.Date" />
+        <input type="hidden" name="date" value="@Model.Times.Date.Date" />
         <div class="btn-group-sm">
             @foreach (var x in Model.Times.TimesList)
             {
@@ -32,9 +32,9 @@
                 {
                     @if (x == y)
                     {
-                        <a class="btn btn-info disabled" value="@x" onclick="this.form.submit()">
+                        <button class="btn btn-info disabled" name="time" value="@x">
                             @x
-                    </a>
+                    </button>
                     <br />
                     ViewBag.Counter = ViewBag.Counter + 1;
                 }
@@ -43,7 +43,7 @@
 
                 @if (ViewBag.Counter == 0)
                 {
-                    <a class="btn btn-info" value="@x" onclick="this.form.submit()">@x</a>
+                    <button type="submit" class="btn btn-info" value="@x" name="time" onclick="this.form.submit()">@x</button>
                     <br />
                 }
 

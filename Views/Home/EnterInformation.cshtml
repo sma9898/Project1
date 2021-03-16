@@ -1,24 +1,27 @@
-@model Group
+@model GroupAppointmentViewModel 
 
 <form asp-action="EnterInformation" method="post">
     <p>Thank you for choosing to visit the temple! Please enter the appropriate information below to make your reservation.</p>
+    <p>@Model.AppointmentTime</p>
     <!--Put selected date here-->
     <h5>Date selected: </h5>
 
-    <label asp-for="GroupName">Name of Group</label>
-    <input asp-for="GroupName" />
+    <input type="hidden" asp-for="AppointmentTime" value="@Model.AppointmentTime" />
+
+    <label asp-for="Group.GroupName">Name of Group</label>
+    <input asp-for="Group.GroupName" />
     <br />
 
-    <label asp-for="Size">Size of Group</label>
-    <input asp-for="Size"/>
+    <label asp-for="Group.Size">Size of Group</label>
+    <input asp-for="Group.Size"/>
     <br />
 
-    <label asp-for="EmailAddress">Email Address</label>
-    <input asp-for="EmailAddress" />
+    <label asp-for="Group.EmailAddress">Email Address</label>
+    <input asp-for="Group.EmailAddress" />
     <br />
 
-    <label asp-for="PhoneNumber">Phone Number (Optional)</label>
-    <input asp-for="PhoneNumber"/>
+    <label asp-for="Group.PhoneNumber">Phone Number (Optional)</label>
+    <input asp-for="Group.PhoneNumber"/>
     <br />
 
     <button type="submit">Sign Up</button>
