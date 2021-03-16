@@ -37,41 +37,21 @@ namespace Project1.Controllers
         }
 
         //Select Date page
+
         [HttpPost]
-        public IActionResult SelectAppointment(Appointment a) //***Pass in parameters
+        public IActionResult SelectAppointment(DateTime Times)
         {
-            //Validation
-            if (ModelState.IsValid)
-            {
-                //Update database
-                context.Appointments.Add(a);
-                context.SaveChanges();
-            }
+            return View(new AvailableTours(Times, context)
+            { });
 
-            return View("AvailableTours"); //***Needs to be added
         }
 
-        //Select Time page
-        [HttpGet]
-        public IActionResult AvailableTours()
-        {
-            return View();
-        }
-
-        //Select Time page
         [HttpPost]
-        public IActionResult AvailableTours(Appointment a) //***Pass in parameters
+        public IActionResult SelectTime(string date, string time)
         {
-            //Validation
-            if (ModelState.IsValid)
-            {
-                //Update database
-                context.Appointments.Add(a);
-                context.SaveChanges();
-            }
-
-            return View("EnterInformation"); //***Needs to be added
+            return View("EnterInformation"); //***Pass in date and time as DateTime object
         }
+
 
 
         //Form for entering tour info
@@ -83,14 +63,17 @@ namespace Project1.Controllers
 
         //Submitting tour information form
         [HttpPost]
-        public IActionResult EnterInformation(Group g) //Pass in parameters
+        public IActionResult EnterInformation(string GroupName, int Size, string EmailAddress, string PhoneNumber, DateTime date) //Pass in parameters
         {
             //Validation
             if (ModelState.IsValid)
             {
                 //Update database
+                Group g = new Group { GroupName = GroupName, Size = Size, EmailAddress = EmailAddress, PhoneNumber = PhoneNumber }
                 context.Groups.Add(g);
+                context.Appointments.Add(new Appointment { Group = g, AppointmentTime = date });
                 context.SaveChanges();
+
             }
 
             return View("ViewAppointments"); //***Change this to appointments list

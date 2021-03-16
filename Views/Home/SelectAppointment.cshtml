@@ -23,7 +23,7 @@
 
 @if (Model != null)
 {
-    <form class="text-center">
+    <form class="text-center" asp-action="SelectTime">
         <input type="hidden" value="@Model.Times.Date.Date" />
         <div class="btn-group-sm">
             @foreach (var x in Model.Times.TimesList)
@@ -32,7 +32,7 @@
                 {
                     @if (x == y)
                     {
-                        <a class="btn btn-info disabled" value="@x">
+                        <a class="btn btn-info disabled" value="@x" onclick="this.form.submit()">
                             @x
                     </a>
                     <br />
@@ -43,7 +43,7 @@
 
                 @if (ViewBag.Counter == 0)
                 {
-                    <a class="btn btn-info" value="@x">@x</a>
+                    <a class="btn btn-info" value="@x" onclick="this.form.submit()">@x</a>
                     <br />
                 }
 
