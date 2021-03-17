@@ -96,7 +96,7 @@ namespace Project1.Controllers
         [HttpGet]
         public IActionResult ViewAppointments()
         {
-            return View(context.Appointments);
+            return View(context);
         }
 
         public IActionResult Privacy()
