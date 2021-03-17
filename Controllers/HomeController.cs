@@ -83,8 +83,10 @@ namespace Project1.Controllers
                 return RedirectToAction("ViewAppointments");
 
             }
-
-            return View(); //***Change this to appointments list
+            else
+            {
+                return View(model);
+            }
         }
 
         //View Appointments Page
