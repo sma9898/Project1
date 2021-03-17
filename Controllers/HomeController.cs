@@ -83,7 +83,7 @@ namespace Project1.Controllers
                 context.Groups.Add(model.Group);
                 context.Appointments.Add(new Appointment { Group = model.Group, AppointmentTime = model.AppointmentTime });
                 context.SaveChanges();
-                return RedirectToAction("ViewAppointments");
+                return RedirectToAction("Index");
 
             }
             else

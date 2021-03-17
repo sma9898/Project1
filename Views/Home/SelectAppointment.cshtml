@@ -15,6 +15,7 @@
 
 @model AvailableToursViewModel
 
+<h1>Select a date and time for your tour</h1>
 <form asp-action="SelectAppointment" method="post">
     <label asp-for="Times">Select a date:</label>
     <input asp-for="Times" type="date" onchange="this.form.submit()" />
