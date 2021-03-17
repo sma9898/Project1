@@ -2,7 +2,7 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-
+    <!--List of appointments already on that day-->
     if (Model != null)
     {
         ViewBag.ListOfAppointments = Model.AppointmentsMade;
@@ -21,18 +21,21 @@
 </form>
 
 
+<!--Only display after they submit the form and the model is no longer null-->
 @if (Model != null)
 {
     <form class="text-center" asp-action="SelectTime">
         <input type="hidden" name="date" value="@Model.Times.Date.Date" />
         <div class="btn-group-sm">
+            <!--Compare the list of all times and the list of appointments-->
             @foreach (var x in Model.Times.TimesList)
             {
                 @foreach (var y in ViewBag.ListOfAppointments)
                 {
                     @if (x == y)
                     {
-                        <a class="btn btn-info disabled" name="time">
+                        <!--If they match, disable the button because there is already an appointment that day-->
+                        <a class="btn btn-light btn-outline-dark disabled" style="width:200px" name="time">
                             @x
                     </a>
                     <br />
@@ -41,9 +44,10 @@
 
                 }
 
+                <!--If they do not match, just show a regular button to submit the form-->
                 @if (ViewBag.Counter == 0)
                 {
-                    <button type="submit" class="btn btn-info" value="@x" name="time" onclick="this.form.submit()">@x</button>
+                    <button type="submit" class="btn btn-light btn-outline-dark" value="@x" style="width:200px" name="time" onclick="this.form.submit()">@x</button>
                     <br />
                 }
 

@@ -20,7 +20,7 @@ namespace Project1.Models.ViewModel
             AppointmentsMade = ScheduledAppointments();
         }
 
-
+        //Get a list of appointment times for that day
         public IEnumerable<string> ScheduledAppointments()
         {
 

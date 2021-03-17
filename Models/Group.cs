@@ -8,6 +8,7 @@ namespace Project1.Models
 {
     public class Group
     {
+        //Primary key
         [Key]
         [Required]
         public int GroupId { get; set; }

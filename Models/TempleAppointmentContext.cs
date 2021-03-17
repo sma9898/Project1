@@ -11,6 +11,7 @@ namespace Project1.Models
         public TempleAppointmentContext (DbContextOptions<TempleAppointmentContext> options) : base (options)
         {}
 
+        //Two tables, groups and appointments
         public DbSet<Group> Groups { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
         
