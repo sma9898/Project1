@@ -7,16 +7,19 @@ namespace Project1.Models.ViewModel
 {
     public class AvailableToursViewModel
     {
+        //Db Context
         private TempleAppointmentContext context { get; set; }
 
         public AvailableTimes Times = new AvailableTimes();
         public IEnumerable<string> AppointmentsMade { get; set; }
+        //Constructor
         public AvailableToursViewModel (DateTime times, TempleAppointmentContext con)
         {
             Times.Date = times;
             context = con;
             AppointmentsMade = ScheduledAppointments();
         }
+
 
         public IEnumerable<string> ScheduledAppointments()
         {

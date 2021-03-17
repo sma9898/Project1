@@ -49,14 +49,17 @@ namespace Project1.Controllers
         [HttpPost]
         public IActionResult SelectTime(DateTime date, string time)
         {
+            //Make the passed parameters a datetime object
             string AppointmentDate = date.Date.ToString();
             AppointmentDate = AppointmentDate.Replace(" 12:00:00 AM", "");
             string myAppointment = AppointmentDate + " " + time;
             DateTime AppointmentInfo = Convert.ToDateTime(myAppointment);
+
+            //Create new view model with the time
             return View("EnterInformation", new GroupAppointmentViewModel
             {
                 AppointmentTime = AppointmentInfo
-            }); //***Pass in date and time as DateTime object
+            });
 
         }
 
