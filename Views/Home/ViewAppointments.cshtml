@@ -4,26 +4,25 @@
     ViewBag.Title = "View Appointments";
 }
 
-@model IEnumerable<Project1.Models.Appointment>
+@model TempleAppointmentContext
 
 <div>
     <h2>Here is the list of appointments:</h2>
 
-    <table>
+    <table class="table">
         <thead>
             <tr>
                 <th>Appointment ID</th>
-                <th>Group</th>
+                
                 <th>Time</th>
             </tr>
         </thead>
 
         <tbody>
-            @foreach (Project1.Models.Appointment x in Model)
+            @foreach (Project1.Models.Appointment x in Model.Appointments)
             {
                 <tr>
                     <td>@x.AppointmentId</td>
-                    <td>@x.Group</td>
                     <td>@x.AppointmentTime</td>
                 </tr>
             }
