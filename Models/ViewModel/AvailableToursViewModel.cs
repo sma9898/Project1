@@ -5,20 +5,21 @@ using System.Threading.Tasks;
 
 namespace Project1.Models.ViewModel
 {
-    public class AvailableTours
+    public class AvailableToursViewModel
     {
+        //Db Context
         private TempleAppointmentContext context { get; set; }
 
         public AvailableTimes Times = new AvailableTimes();
         public IEnumerable<string> AppointmentsMade { get; set; }
-        public AvailableTours (DateTime times, TempleAppointmentContext con)
+        //Constructor
+        public AvailableToursViewModel (DateTime times, TempleAppointmentContext con)
         {
             Times.Date = times;
             context = con;
             AppointmentsMade = ScheduledAppointments();
         }
 
-        
 
         public IEnumerable<string> ScheduledAppointments()
         {

@@ -37,41 +37,32 @@ namespace Project1.Controllers
         }
 
         //Select Date page
+
         [HttpPost]
-        public IActionResult SelectAppointment(Appointment a) //***Pass in parameters
+        public IActionResult SelectAppointment(DateTime Times)
         {
-            //Validation
-            if (ModelState.IsValid)
-            {
-                //Update database
-                context.Appointments.Add(a);
-                context.SaveChanges();
-            }
+            return View(new AvailableToursViewModel(Times, context)
+            { });
 
-            return View("AvailableTours"); //***Needs to be added
         }
 
-        //Select Time page
-        [HttpGet]
-        public IActionResult AvailableTours()
-        {
-            return View();
-        }
-
-        //Select Time page
         [HttpPost]
-        public IActionResult AvailableTours(Appointment a) //***Pass in parameters
+        public IActionResult SelectTime(DateTime date, string time)
         {
-            //Validation
-            if (ModelState.IsValid)
-            {
-                //Update database
-                context.Appointments.Add(a);
-                context.SaveChanges();
-            }
+            //Make the passed parameters a datetime object
+            string AppointmentDate = date.Date.ToString();
+            AppointmentDate = AppointmentDate.Replace(" 12:00:00 AM", "");
+            string myAppointment = AppointmentDate + " " + time;
+            DateTime AppointmentInfo = Convert.ToDateTime(myAppointment);
 
-            return View("EnterInformation"); //***Needs to be added
+            //Create new view model with the time
+            return View("EnterInformation", new GroupAppointmentViewModel
+            {
+                AppointmentTime = AppointmentInfo
+            });
+
         }
+
 
 
         //Form for entering tour info
@@ -83,17 +74,22 @@ namespace Project1.Controllers
 
         //Submitting tour information form
         [HttpPost]
-        public IActionResult EnterInformation(Group g) //Pass in parameters
+        public IActionResult EnterInformation(GroupAppointmentViewModel model) //Pass in parameters
         {
             //Validation
             if (ModelState.IsValid)
             {
                 //Update database
-                context.Groups.Add(g);
+                context.Groups.Add(model.Group);
+                context.Appointments.Add(new Appointment { Group = model.Group, AppointmentTime = model.AppointmentTime });
                 context.SaveChanges();
-            }
+                return RedirectToAction("ViewAppointments");
 
-            return View("ViewAppointments"); //***Change this to appointments list
+            }
+            else
+            {
+                return View(model);
+            }
         }
 
         //View Appointments Page

@@ -1,27 +1,36 @@
-@model Group
+@model GroupAppointmentViewModel 
 
-<form asp-action="EnterInformation" method="post">
-    <p>Thank you for choosing to visit the temple! Please enter the appropriate information below to make your reservation.</p>
-    <!--Put selected date here-->
-    <h5>Date selected: </h5>
+<!--Link for styling for the inputs-->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    
+<p>Thank you for choosing to visit the temple! Please enter the appropriate information below to complete your reservation.</p>
+<!--Put selected date here-->
+<h5><b>Date/Time selected:</b> @Model.AppointmentTime</h5>
+<br />
 
-    <label asp-for="GroupName">Name of Group</label>
-    <input asp-for="GroupName" />
+<form asp-action="EnterInformation" method="post" class="w3-container">
+    <input type="hidden" asp-for="AppointmentTime" value="@Model.AppointmentTime" />
+
+    <label asp-for="Group.GroupName">Name of Group</label>
+    <input asp-for="Group.GroupName" class="w3-input" />
     <br />
 
-    <label asp-for="Size">Size of Group</label>
-    <input asp-for="Size"/>
+    <label asp-for="Group.Size">Size of Group</label>
+    <input asp-for="Group.Size" class="w3-input" />
     <br />
 
-    <label asp-for="EmailAddress">Email Address</label>
-    <input asp-for="EmailAddress" />
+    <label asp-for="Group.EmailAddress">Email Address</label>
+    <input asp-for="Group.EmailAddress" class="w3-input" />
     <br />
 
-    <label asp-for="EmailAddress">Phone Number (Optional)</label>
-    <input asp-for="EmailAddress"/>
+    <!--Phone input has a pattern so the user enters correct format-->
+    <label asp-for="Group.PhoneNumber">Phone Number (Optional)</label>
+    <input asp-for="Group.PhoneNumber" class="w3-input" type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" />
+    <small>Format: 123-456-7890</small>
+    <br />
     <br />
 
-    <button type="submit">Sign Up</button>
+    <button type="submit" class="btn btn-dark">Sign Up</button>
     <br />
 
     <div asp-validation-summary="All"></div>
